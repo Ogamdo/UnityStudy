@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class KickOff : MonoBehaviour
+{
+    public float power;//Addforce에 사용하기 위해 ForceMode Struct로 선언해준다.
+    private Rigidbody ball;
+    private float x, y, z;
+    
+   
+    // Start is called before the first frame update
+    void Start() //x,y,z 방향을 랜덤하게 정해준다.d
+    {
+        x =Random.Range(-5, 5);
+        y = Random.Range(-5,5);
+        z = Random.Range(1,5); //Z는 전방으로 향해야 하므로 1이상이여 한다.
+        ball = GetComponent<Rigidbody>(); // Reference the Rigidbody component
+        
+     
+    
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Kick();
+        }
+    }
+
+    // Method to apply force
+    void Kick()
+    {   
+        
+        ball.AddForce(x*power, y*power,z*power); // Apply force in the forward direction
+        Destroy(gameObject, 5.0f);
+    }
+
+}
